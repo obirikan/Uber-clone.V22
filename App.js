@@ -12,8 +12,11 @@ export default function App() {
 
   return (
     <Context>
-    <KeyboardAvoidingView style={{flex:1}}
+    <KeyboardAvoidingView 
+     style={{flex:1}}
      behavior={Platform.OS==="ios"?"padding":"height"}
+     keyboardVerticalOffset={Platform.OS==='ios'?-64:0}
+
      >
        <NavigationContainer>
             <SafeAreaProvider>

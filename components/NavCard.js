@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View,SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View,SafeAreaView,TouchableOpacity } from 'react-native'
 import React from 'react'
 import tw from 'twrnc';
+import { Icon } from '@rneui/themed';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useContext } from 'react';
 import { Maps } from '../Context/Context';
@@ -32,8 +33,31 @@ const NavCard = () => {
             placeholder='where to?'
             enablePoweredByContainer={false}/>
          </View>
+         <Navfavs/>
      </View>
-     <Navfavs/>
+
+     <View style={tw`flex-row justify-evenly py-2 mt-auto border-t border-gray-100`}>
+        <TouchableOpacity style={tw`bg-black flex  flex-row justify-evenly w-24 px-3 py-3 rounded-full `}>
+            <Icon
+              name='car-outline'
+              type='ionicon'
+              color='white'
+              size={18}
+            />
+            <Text style={tw`text-white`}>Ride</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={tw`flex flex-row justify-evenly w-24 px-3 py-3 rounded-full `}>
+            <Icon
+              name='fast-food-outline'
+              type='ionicon'
+              color='black'
+              size={18}
+
+            />
+            <Text >Eats</Text>
+        </TouchableOpacity>
+     </View>
+     
     </SafeAreaView>
   )
 }
