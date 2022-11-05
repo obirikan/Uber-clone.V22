@@ -3,6 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Icon } from '@rneui/themed';
 import React from 'react'
 import tw from 'twrnc';
+import { useContext } from 'react';
+import { Maps } from '../Context/Context';
 
 const data=[
     {
@@ -22,6 +24,7 @@ const data=[
 
 
 const NavOptions = () => {
+    const {origin}=useContext(Maps)
     const navigation = useNavigation();
   return (
     <View>
@@ -32,8 +35,10 @@ const NavOptions = () => {
             renderItem={({item})=>(
                 <TouchableOpacity 
                 onPress={()=>navigation.navigate(item.screen)}
-                style={tw`p-3 pl-5 pt-5 bg-gray-200 m-2`}>
-                    <View>
+                style={tw`p-3 pl-5 pt-5 bg-gray-200 m-2`}
+                disabled={!origin}
+                >
+                    <View style={tw`${!origin&& "opacity-10"}`}>
                         <Image
                           style={{width:120,height:120,resizeMode:'contain'}}
                           source={{uri:item.image}}
