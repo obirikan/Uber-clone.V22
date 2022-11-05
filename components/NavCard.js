@@ -5,6 +5,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { useContext } from 'react';
 import { Maps } from '../Context/Context';
 import { useNavigation } from '@react-navigation/native';
+import Navfavs from './Navfavs';
 
 const NavCard = () => {
     const {setdestination,origin}=useContext(Maps)
@@ -32,6 +33,7 @@ const NavCard = () => {
             enablePoweredByContainer={false}/>
          </View>
      </View>
+     <Navfavs/>
     </SafeAreaView>
   )
 }
