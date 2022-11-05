@@ -7,6 +7,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 
 import { useContext } from 'react';
 import { Maps } from '../Context/Context';
+import Navfavs from '../components/Navfavs';
 
 const HomeScreen = () => {
   const {setorigin,setdestination,origin}=useContext(Maps)
@@ -49,8 +50,9 @@ const HomeScreen = () => {
            enablePoweredByContainer={false}
        
           />
-
+          
          <NavOptions/>
+         <Navfavs/>
       </View>
     </SafeAreaView>
   )
