@@ -13,7 +13,7 @@ const NavCard = () => {
     const navigation=useNavigation()
   return (
     <SafeAreaView style={tw`bg-white flex-1`}>
-     <Text style={tw`text-xl py-5 flex text-center`}>Kay You are SUPER PUMPED!!</Text>
+     <Text style={tw`text-xl py-5 flex text-center`}> SUPER PUMPED!!</Text>
      <View style={tw`border-t border-gray-200 flex-shrink`}>
          <View >
             <GooglePlacesAutocomplete
@@ -37,7 +37,12 @@ const NavCard = () => {
      </View>
 
      <View style={tw`flex-row justify-evenly py-2 mt-auto border-t border-gray-100`}>
-        <TouchableOpacity style={tw`bg-black flex  flex-row justify-evenly w-24 px-3 py-3 rounded-full `}>
+        <TouchableOpacity 
+        onPress={()=>{
+            navigation.navigate('rideOptions')
+        }}
+        
+        style={tw`bg-black flex  flex-row justify-evenly w-24 px-3 py-3 rounded-full `}>
             <Icon
               name='car-outline'
               type='ionicon'

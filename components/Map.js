@@ -5,11 +5,13 @@ import tw from 'twrnc';
 import { useContext } from 'react';
 import { Maps } from '../Context/Context';
 import MapViewDirection from 'react-native-maps-directions'
-
+import axios from 'axios';
 
 const Map = () => {
- const {origin,destination}=useContext(Maps)
+ const {origin,destination,settime,time}=useContext(Maps)
+
  const mapRef=useRef(null)
+
 
  useEffect(() => {
      if(!origin||!destination) return
@@ -17,7 +19,18 @@ const Map = () => {
         edgepadding:{top:50,right:50,bottom:50,left:50}
      })
  }, [origin,destination])
- 
+
+ useEffect(() => {
+  const apikey='AIzaSyBvhOxK6g42RrBfZqtFnutVGxo_GPkXzTM'
+    const travel=async ()=>{
+      await axios(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.description}&destinations=${destination.description}&units=imperial&key=${apikey}`).then((res)=>{
+          settime(res.data.rows[0].elements[0])
+      }).catch((err)=>console.log(err))
+    }
+   travel()
+   
+}, [origin,destination])
+
   return (
   <MapView
    ref={mapRef}
