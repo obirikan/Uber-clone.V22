@@ -1,18 +1,20 @@
-import { StyleSheet, Text, View,SafeAreaView } from 'react-native';
-import { Provider } from 'react-redux';
+import { StyleSheet, KeyboardAvoidingView,Platform} from 'react-native';
 import HomeScreen from './screens/HomeScreen';
-import { store } from './Store';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-gesture-handler'
 import {NavigationContainer} from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import Mapscreen from './screens/Mapscreen';
+import Context from './Context/Context';
 
 export default function App() {
   const Stack = createStackNavigator();
 
   return (
-    <Provider store={store}>
+    <Context>
+    <KeyboardAvoidingView style={{flex:1}}
+     behavior={Platform.OS==="ios"?"padding":"height"}
+     >
        <NavigationContainer>
             <SafeAreaProvider>
                 <Stack.Navigator  screenOptions={{headerShown: false}}>
@@ -21,7 +23,8 @@ export default function App() {
                 </Stack.Navigator>
             </SafeAreaProvider>
        </NavigationContainer>
-    </Provider>
+    </KeyboardAvoidingView>
+    </Context>
   );
 }
 

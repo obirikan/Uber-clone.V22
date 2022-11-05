@@ -1,14 +1,19 @@
-import { StyleSheet, Text, View ,SafeAreaView, Image} from 'react-native'
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { StyleSheet, Text, View ,SafeAreaView, Image,} from 'react-native'
 import React from 'react'
 import tw from 'twrnc';
 import NavOptions from '../components/NavOptions';
 import {APIKEY} from "@env"
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
+import { useContext } from 'react';
+import { Maps } from '../Context/Context';
 
 const HomeScreen = () => {
+  const {setorigin,setdestination,origin}=useContext(Maps)
+ 
   return (
-    <SafeAreaView style={tw` h-full`}>
-      <View style={tw`p-5 h-full`}>
+    <SafeAreaView style={tw`bg-white h-full`}>
+      <View style={tw`p-5`}>
          <Image 
            style={{
             width:100,
@@ -20,23 +25,30 @@ const HomeScreen = () => {
            }}
          />
           <GooglePlacesAutocomplete
-          placeholder='where from'
-          styles={{
-            container:{
-               flex:0
-            },
-            textInput:{
-               fontSize:15,
-            },
-         }}
-          query={{
-            key:'AIzaSyBxKxEfHLM1EhnPacoxM4yLiXIZVZ5r6h8',
-            language: 'en',
-          }}
+           styles={{
+             container:{
+                flex:0
+             },
+             textInput:{
+              fontSize:18
+             }
 
-          nearbyPlacesAPI='GooglePlacesSearch'
-          debounce={200}
-         />
+           }}
+           onPress={(data, details = null) => {
+            setorigin({
+                 location:details.geometry.location,
+                 description:data.description
+               })
+          }}
+          fetchDetails ={true}
+           query={{
+             key:'AIzaSyBvhOxK6g42RrBfZqtFnutVGxo_GPkXzTM',
+             language:'en'
+           }}
+           placeholder='where from?'
+           enablePoweredByContainer={false}
+       
+          />
 
          <NavOptions/>
       </View>
