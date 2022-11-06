@@ -11,7 +11,6 @@ import { Maps } from '../Context/Context';
 const RideOptions = () => {
   const navigation=useNavigation()
   const[select,setselected]=useState(null)
-  const Ghana=13.70
   const {time}=useContext(Maps)
 
   const data=[
@@ -52,7 +51,7 @@ const RideOptions = () => {
               
           </TouchableOpacity>
           <Text style={tw`text-center py-5 text-xl font-semibold text-white`}>
-          {select?select.title:`select a ride - ${time&&time?.distance.text}`}
+          {select?select.title:`select a ride - ${time?.distance.text}`}
           </Text>
       </View>
 
@@ -74,10 +73,10 @@ const RideOptions = () => {
             />
             <View style={tw`-ml-7`}>
                <Text style={tw`text-xl font-semibold`}>{title}</Text>
-               <Text>{time&&time?.duration.text} Travel time</Text>
+               <Text>{time?.duration.text} Travel time</Text>
             </View>
             <Text style={tw`text-xl mb-4 font-semibold`}>{
-               new Intl.NumberFormat('en-gb', { style: 'currency', currency: 'GHC' }).format((time&&time?.duration.value*1.5*multiplier/100))}</Text>
+               new Intl.NumberFormat('en-gb', { style: 'currency', currency: 'GHC' }).format((time?.duration.value*1.5*multiplier/100))}</Text>
         </TouchableOpacity>
       )}
      />

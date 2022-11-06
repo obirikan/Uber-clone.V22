@@ -5,6 +5,7 @@ import Map from '../components/Map';
 import { createStackNavigator } from '@react-navigation/stack';
 import NavCard from '../components/NavCard';
 import RideOptions from '../components/RideOptions';
+import { Icon } from '@rneui/base';
 
 
 const Mapscreen = () => {
