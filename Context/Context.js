@@ -5,7 +5,7 @@ export const Maps=createContext()
 const Context=({children})=>{
   const[origin,setorigin]=useState(null)
   const[destination,setdestination]=useState(null)
-  const[time,settime]=useState(null)
+  const[time,settime]=useState()
     return(
         <Maps.Provider value={{
             origin,

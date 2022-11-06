@@ -2,8 +2,22 @@ import { StyleSheet, Text, View,FlatList,TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Icon } from '@rneui/themed'
 import tw from 'twrnc'
+import { useContext ,useState,useEffect} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { Maps } from '../Context/Context';
 
-const Navfavs = () => {
+const Navfavs = ({long,lat}) => {
+    const navigation=useNavigation()
+    const {setorigin,setdestination,origin}=useContext(Maps)
+    const loca={
+        "description": "My location",
+        "location":{
+            "lat":lat,
+            "lng":long
+        }
+    }
+    console.log(loca.location)
+    console.log(loca.description)
     const data=[
         {
             id:"123",
@@ -27,7 +41,15 @@ const Navfavs = () => {
         />
   )}
       renderItem={({item:{location,destination,icon}})=>(
-        <TouchableOpacity style={tw`flex-row p-5 `}>
+        <TouchableOpacity 
+        onPress={() => {
+            setorigin({
+                 location:loca.location,
+                 description:loca.description
+               })
+               navigation.navigate('mapscreen')
+          }}
+        style={tw`flex-row p-5 `}>
              <Icon
               style={tw`mr-4 rounded-full bg-gray-400 p-3`}
               name={icon}

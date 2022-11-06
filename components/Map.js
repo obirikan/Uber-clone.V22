@@ -8,10 +8,10 @@ import MapViewDirection from 'react-native-maps-directions'
 import axios from 'axios';
 
 const Map = () => {
- const {origin,destination,settime,time}=useContext(Maps)
+ const {origin,destination,settime}=useContext(Maps)
 
  const mapRef=useRef(null)
-
+ console.log(origin);
 
  useEffect(() => {
      if(!origin||!destination) return
@@ -23,13 +23,12 @@ const Map = () => {
  useEffect(() => {
   const apikey='AIzaSyBvhOxK6g42RrBfZqtFnutVGxo_GPkXzTM'
     const travel=async ()=>{
-      await axios(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.description}&destinations=${destination.description}&units=imperial&key=${apikey}`).then((res)=>{
+       axios(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.description}&destinations=${destination.description}&units=imperial&key=${apikey}`).then((res)=>{
           settime(res.data.rows[0].elements[0])
       }).catch((err)=>console.log(err))
     }
    travel()
-   
-}, [origin,destination])
+}, [origin,destination,'AIzaSyBvhOxK6g42RrBfZqtFnutVGxo_GPkXzTM'])
 
   return (
   <MapView

@@ -5,12 +5,34 @@ import NavOptions from '../components/NavOptions';
 import {APIKEY} from "@env"
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
-import { useContext } from 'react';
+import { useContext ,useState,useEffect} from 'react';
 import { Maps } from '../Context/Context';
 import Navfavs from '../components/Navfavs';
+import * as Location from 'expo-location';
 
 const HomeScreen = () => {
   const {setorigin,setdestination,origin}=useContext(Maps)
+  const [location, setLocation] = useState(null);
+  const [lat,setlat]=useState()
+  const [long,setlong]=useState()
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  
+  useEffect(() => {
+    (async () => {
+      
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      console.log(location.coords.latitude);
+      console.log(location.coords.longitude);
+      console.log(location);
+    })();
+  }, []);
  
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
@@ -52,7 +74,7 @@ const HomeScreen = () => {
           />
           
          <NavOptions/>
-         <Navfavs/>
+         <Navfavs lat={lat} long={long}/>
       </View>
     </SafeAreaView>
   )
