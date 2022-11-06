@@ -4,10 +4,15 @@ import  tw from 'twrnc'
 import { Icon } from '@rneui/base'
 import { useNavigation } from '@react-navigation/native'
 import { FlatList } from 'react-native-gesture-handler'
+import { useContext } from 'react';
+import { Maps } from '../Context/Context';
+
 
 const RideOptions = () => {
   const navigation=useNavigation()
   const[select,setselected]=useState(null)
+  const Ghana=13.70
+  const {time}=useContext(Maps)
 
   const data=[
     {
@@ -19,7 +24,7 @@ const RideOptions = () => {
     {
       id:"123",
       title:"Uber-Xl",
-      multiplier:"Home",
+      multiplier:1.5,
       image:"https://links.papareact.com/5w8"
   },
     {
@@ -29,6 +34,7 @@ const RideOptions = () => {
       image:"https://links.papareact.com/7pf"
   },
 ]
+
 
   return (
     <SafeAreaView style={tw`bg-white flex-grow`}>
@@ -43,8 +49,11 @@ const RideOptions = () => {
                type='ionicon'
                color='white'
               />
+              
           </TouchableOpacity>
-          <Text style={tw`text-center py-5 text-xl font-semibold text-white`}>{select?select.title:'select a ride'}</Text>
+          <Text style={tw`text-center py-5 text-xl font-semibold text-white`}>
+          {select?select.title:`select a ride - ${time&&time?.distance.text}`}
+          </Text>
       </View>
 
      <FlatList data={data} 
@@ -65,22 +74,15 @@ const RideOptions = () => {
             />
             <View style={tw`-ml-7`}>
                <Text style={tw`text-xl font-semibold`}>{title}</Text>
-               <Text>Travel time....</Text>
+               <Text>{time&&time?.duration.text} Travel time</Text>
             </View>
-            <Text>$200</Text>
+            <Text style={tw`text-xl mb-4 font-semibold`}>{
+               new Intl.NumberFormat('en-gb', { style: 'currency', currency: 'GHC' }).format((time&&time?.duration.value*1.5*multiplier/100))}</Text>
         </TouchableOpacity>
       )}
      />
-
-      <View style={tw`bg-black`}>
-         <TouchableOpacity>
-          <Text style={[tw`text-xl`,{fontSize:200}]}>choose</Text>
-         </TouchableOpacity>
-      </View>
     </SafeAreaView>
   )
 }
 
 export default RideOptions
-
-const styles = StyleSheet.create({})
