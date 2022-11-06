@@ -23,7 +23,7 @@ const Map = () => {
  useEffect(() => {
   const apikey='AIzaSyBvhOxK6g42RrBfZqtFnutVGxo_GPkXzTM'
     const travel=async ()=>{
-       axios(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.description}&destinations=${destination.description}&units=imperial&key=${apikey}`).then((res)=>{
+        axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.description}&destinations=${destination.description}&units=imperial&key=${apikey}`).then((res)=>{
           settime(res.data.rows[0].elements[0])
       }).catch((err)=>console.log(err))
     }
