@@ -13,8 +13,9 @@ import * as Location from 'expo-location';
 const HomeScreen = () => {
   const {setorigin,setdestination,origin}=useContext(Maps)
   const [location, setLocation] = useState(null);
-  const [lat,setlat]=useState()
-  const [long,setlong]=useState()
+  let [latitude,setlat]=useState()
+  let [longitude,setlong]=useState()
+  let [des,setdes]=useState()
   const [errorMsg, setErrorMsg] = useState(null);
 
   
@@ -27,10 +28,23 @@ const HomeScreen = () => {
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({});
-      console.log(location.coords.latitude);
-      console.log(location.coords.longitude);
-      console.log(location);
+    let { coords } = await Location.getCurrentPositionAsync();
+
+    if (coords) {
+      const { latitude, longitude } = coords;
+      let response = await Location.reverseGeocodeAsync({
+        latitude,
+        longitude,
+      });
+      setlat(latitude)
+      setlong(longitude )
+      for (let item of response) {
+        let address = `${item.name}, ${item.street}, ${item.postalCode}, ${item.city}`;
+        setdes(item.name)
+      }
+    }
+
+
     })();
   }, []);
  
@@ -65,16 +79,17 @@ const HomeScreen = () => {
           }}
           fetchDetails ={true}
            query={{
-             key:'AIzaSyBvhOxK6g42RrBfZqtFnutVGxo_GPkXzTM',
+             key:'AIzaSyBvY4dayqi5VtQAYCkStCOc2989p2jvGiA',
              language:'en'
            }}
            placeholder='where from?'
            enablePoweredByContainer={false}
+           onFail={error => console.error(error)}
        
           />
           
          <NavOptions/>
-         <Navfavs lat={lat} long={long}/>
+         <Navfavs lat={latitude} long={longitude} des={des}/>
       </View>
     </SafeAreaView>
   )

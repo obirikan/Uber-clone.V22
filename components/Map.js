@@ -21,20 +21,20 @@ const Map = () => {
  }, [origin,destination])
 
  useEffect(() => {
-  const apikey='AIzaSyBvhOxK6g42RrBfZqtFnutVGxo_GPkXzTM'
+  const apikey='AIzaSyBvY4dayqi5VtQAYCkStCOc2989p2jvGiA'
     const travel=async ()=>{
         axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.description}&destinations=${destination.description}&units=imperial&key=${apikey}`).then((res)=>{
           settime(res.data.rows[0].elements[0])
       }).catch((err)=>console.log(err))
     }
    travel()
-}, [origin,destination,'AIzaSyBvhOxK6g42RrBfZqtFnutVGxo_GPkXzTM'])
+}, [origin,destination,'AIzaSyBvY4dayqi5VtQAYCkStCOc2989p2jvGiA'])
 
   return (
   <MapView
    ref={mapRef}
    style={tw`flex-1`}
-   mapType='mutedStandard'
+   mapType='satellite'
     initialRegion={{
       latitude: origin.location.lat,
       longitude: origin.location.lng,
@@ -47,7 +47,7 @@ const Map = () => {
         <MapViewDirection
           origin={origin.description}
           destination={destination.description}
-          apikey='AIzaSyBvhOxK6g42RrBfZqtFnutVGxo_GPkXzTM'
+          apikey='AIzaSyBvY4dayqi5VtQAYCkStCOc2989p2jvGiA'
           strokeWidth={3}
           strokeColor='black'
         />
