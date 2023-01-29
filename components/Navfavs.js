@@ -6,11 +6,11 @@ import { useContext ,useState,useEffect} from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Maps } from '../Context/Context';
 
-const Navfavs = ({long,lat}) => {
+const Navfavs = ({long,lat,des}) => {
     const navigation=useNavigation()
     const {setorigin,setdestination,origin}=useContext(Maps)
     const loca={
-        "description": "My location",
+        "description": des,
         "location":{
             "lat":lat,
             "lng":long
@@ -23,7 +23,7 @@ const Navfavs = ({long,lat}) => {
             id:"123",
             icon:"home-outline",
             location:"Home",
-            destination:"London,Uk"
+            destination:des
         },
         {
             id:"1222",
