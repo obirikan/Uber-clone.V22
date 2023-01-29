@@ -27,7 +27,7 @@ const NavCard = () => {
             }}
             fetchDetails ={true}
             query={{
-                key:'AIzaSyBvY4dayqi5VtQAYCkStCOc2989p2jvGiA',
+                key:'',
                 language:'en'
             }}
             placeholder='where to?'

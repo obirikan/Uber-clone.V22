@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
 import React,{useRef,useEffect} from 'react'
 import MapView,{Marker} from 'react-native-maps'
 import tw from 'twrnc';
@@ -6,9 +6,13 @@ import { useContext } from 'react';
 import { Maps } from '../Context/Context';
 import MapViewDirection from 'react-native-maps-directions'
 import axios from 'axios';
+import { fonts } from '@rneui/base';
+import { Icon } from '@rneui/base'
+import { useNavigation } from '@react-navigation/native';
 
 const Map = () => {
  const {origin,destination,settime}=useContext(Maps)
+ const navigation=useNavigation()
 
  const mapRef=useRef(null)
  console.log(origin);
@@ -21,14 +25,14 @@ const Map = () => {
  }, [origin,destination])
 
  useEffect(() => {
-  const apikey='AIzaSyBvY4dayqi5VtQAYCkStCOc2989p2jvGiA'
+  const apikey=''
     const travel=async ()=>{
         axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.description}&destinations=${destination.description}&units=imperial&key=${apikey}`).then((res)=>{
           settime(res.data.rows[0].elements[0])
       }).catch((err)=>console.log(err))
     }
    travel()
-}, [origin,destination,'AIzaSyBvY4dayqi5VtQAYCkStCOc2989p2jvGiA'])
+}, [origin,destination,''])
 
   return (
   <MapView
@@ -41,18 +45,21 @@ const Map = () => {
       latitudeDelta: 0.005, 
       longitudeDelta: 0.005,
     }}
+    onPress={(data) => {console.log(data.currentTarget.location)}}
   >
-    {
-     origin&&destination&&(
-        <MapViewDirection
-          origin={origin.description}
-          destination={destination.description}
-          apikey='AIzaSyBvY4dayqi5VtQAYCkStCOc2989p2jvGiA'
-          strokeWidth={3}
-          strokeColor='black'
-        />
-     )
-    }
+    <TouchableOpacity 
+             onPress={()=>{
+              navigation.navigate("Home")
+             }}
+             style={tw`absolute top-6 left-3 bg-black p-3 rounded-full`}
+    >
+    <Icon
+               name='arrow-back-outline'
+               type='ionicon'
+               color='white'
+              />
+
+    </TouchableOpacity>
     {
      origin?.location&&(
         <Marker
@@ -63,9 +70,16 @@ const Map = () => {
          title="kayspoint"
          description={origin.description}
          identifier='origin'
+         onPress={()=>{
+          navigation.navigate("page")
+         }}
+         onLongPress={()=>{
+          console.log('hello')
+         }}
         />
      )
     }
+
     {
      destination?.location&&(
         <Marker
@@ -85,4 +99,11 @@ const Map = () => {
 
 export default Map
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  back:{
+    fontSize:50,
+    position:'relative',
+    top:30,
+    left:10,
+  }
+})

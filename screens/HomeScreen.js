@@ -79,7 +79,7 @@ const HomeScreen = () => {
           }}
           fetchDetails ={true}
            query={{
-             key:'AIzaSyBvY4dayqi5VtQAYCkStCOc2989p2jvGiA',
+             key:APIKEY,
              language:'en'
            }}
            placeholder='where from?'
