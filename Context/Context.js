@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 
 export const Maps=createContext()
-
+//context
 const Context=({children})=>{
   const[origin,setorigin]=useState(null)
   const[destination,setdestination]=useState(null)
