@@ -2,6 +2,7 @@ import { StyleSheet, Text, View ,SafeAreaView, Image,} from 'react-native'
 import React from 'react'
 import tw from 'twrnc';
 import NavOptions from '../components/NavOptions';
+//env
 import {APIKEY} from "@env"
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
