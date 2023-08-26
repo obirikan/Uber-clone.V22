@@ -11,6 +11,9 @@ import Page from './components/Page';
 export default function App() {
   const Stack = createStackNavigator();
 
+
+
+  
   return (
     <Context>
     <KeyboardAvoidingView 
